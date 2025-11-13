@@ -37,7 +37,6 @@ func TestDealDamageReducesHealthOfTargetTestify(t *testing.T) {
 			attackerPlayer.DealDamage(targetPlayer, expectedCase.damageToMake)
 
 			assert.Equal(t, expectedCase.expectedHealth, targetPlayer.GetHealth())
-			assert.Equal(t, expectedCase.expectedHealth, targetPlayer.GetHealth())
 			assert.Equal(t, expectedCase.expectedLevel, targetPlayer.GetLevel())
 			assert.Equal(t, expectedCase.expectedAlive, targetPlayer.IsAlive())
 		})
