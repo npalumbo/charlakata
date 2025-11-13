@@ -53,6 +53,9 @@ func (suite *PostgresPlayerRepositoryTestSuite) SetupSuite() {
 }
 
 func (suite *PostgresPlayerRepositoryTestSuite) TearDownSuite() {
+	if err := suite.playerRepository.Close(suite.ctx); err != nil {
+		log.Fatalf("error closing connection: %s", err)
+	}
 	if err := suite.pgContainer.Terminate(suite.ctx); err != nil {
 		log.Fatalf("error terminating postgres container: %s", err)
 	}

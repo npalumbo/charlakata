@@ -10,6 +10,7 @@ import (
 
 type PlayerRepository interface {
 	LoadAllPlayers(ctx context.Context) ([]DBPlayer, error)
+	Close(ctx context.Context) error
 }
 
 type postgresRepository struct {
@@ -22,7 +23,7 @@ type DBPlayer struct {
 	Level  int
 }
 
-func (p postgresRepository) LoadAllPlayers(ctx context.Context) ([]DBPlayer, error) {
+func (p *postgresRepository) LoadAllPlayers(ctx context.Context) ([]DBPlayer, error) {
 	rows, err := p.conn.Query(ctx, "SELECT id, health, level FROM player ORDER BY id")
 
 	if err != nil {
@@ -52,6 +53,13 @@ func processPlayers(rows pgx.Rows) ([]DBPlayer, error) {
 	}
 
 	return players, nil
+}
+
+func (p *postgresRepository) Close(ctx context.Context) error {
+	if p.conn != nil {
+		return p.conn.Close(ctx)
+	}
+	return nil
 }
 
 func NewPostgresPlayerRepository(ctx context.Context, connStr string) (PlayerRepository, error) {
