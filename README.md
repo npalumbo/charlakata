@@ -16,6 +16,11 @@ This project was created for my talk at GDG DevFest Sevilla 2025: "Testing with 
   - English: [EN_GDG_DevFest_Testing_with_Go.pdf](EN_GDG_DevFest_Testing_with_Go.pdf)
   - Spanish: [ES_GDG_DevFest_Testeando_con_Go.pdf](ES_GDG_DevFest_Testeando_con_Go.pdf)
 
+## How to run it:
+You'd need go 1.25 or higher. 
+Run `make tools` on you terminal to install the tools (golangci-lint, mockery and Ginkgo).
+Run `make test` to execute the tests.
+
 ## Kata
 
 The repo implements a subset of the Kata documented [here](https://github.com/ardalis/kata-catalog/blob/main/katas/RPG%20Combat.md).
